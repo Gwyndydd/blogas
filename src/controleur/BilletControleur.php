@@ -4,6 +4,7 @@ namespace blogapp\controleur;
 
 use blogapp\modele\Billet;
 use blogapp\vue\BilletVue;
+use Illuminate\Pagination\Paginator;
 
 class BilletControleur {
     private $cont;
@@ -22,7 +23,9 @@ class BilletControleur {
     }
 
     public function liste($rq, $rs, $args) {
-        $billets = Billet::get();
+        $billets = Billet::orderBy('date','DESC')->simplePaginate(2);
+        /*ajouter composer require illuminate/pagination "~5.0" pour utiliser simplePaginate
+        Commentaire juste au cas où problème */
 
         $bl = new BilletVue($this->cont, $billets, BilletVue::LISTE_VUE);
         $rs->getBody()->write($bl->render());

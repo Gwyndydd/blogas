@@ -10,6 +10,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 use \blogapp\conf\ConnectionFactory;
+use Illuminate\Pagination\Paginator;
 
 // Création de la connexion à la base
 ConnectionFactory::makeConnection('src/conf/conf.ini');

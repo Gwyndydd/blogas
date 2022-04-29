@@ -15,6 +15,10 @@ class Billet extends \Illuminate\Database\Eloquent\Model {
         return $this->hasMany('\blogapp\modele\Commentaires','id_com');
     }
 
+    /*public function resume(){
+        return $this->
+    }*/
+
 }
 
 ?>

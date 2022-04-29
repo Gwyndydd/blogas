@@ -31,22 +31,24 @@ class BilletVue extends Vue {
         <li>Catégorie : {$this->source->categorie->titre}</li>
         <li>Contenu : {$this->source->body}</li>
     </ul>
-    <h3>Commentaire</h3>
+    <h3>Commentaires :</h3>
     <ul>
     YOP;
             
-            $com = $this->source->commentaire()->get();
-            if($com != null){
-                foreach($com as $com){
-                    $res .= <<< YOP
+            $com = $this->source->commentaire;
+            $count = 0;
+            foreach($com as $com){
+                $count += 1;
+                $res .= <<< YOP
         <li>
             <h4>date : {$com->DateCom}</h4>
             <p>{$com->contenu}</p>
         </li>
     YOP;
-                }   
+                }
+            if($count == 0){
+            $res.="<h4>Aucun commentaire<h4>";
             }
-            else $res.="<li><h4>Aucun commentaire<h4></li>";
         $res .= "</ul>";
 
         }
@@ -63,14 +65,23 @@ class BilletVue extends Vue {
             $res = <<<YOP
     <h1>Affichage de la liste des billets</h1>
     <ul>
-YOP;
+YOP;        $coll = $this->source->forPage(2,1);
             foreach ($this->source as $billet) {
                 $url = $this->cont->router->pathFor('billet_aff', ['id' => $billet->id]);
                 $res .= <<<YOP
-        <li><a href="$url">{$billet->titre}</a></li>
+        <li><a href="$url">{$billet->titre}</a>
+        <h4>{$billet->date}</h4>
+        <h4>catégorie: {$billet->categorie->titre}</h4>
+        <p>
 YOP;
+        $res.= substr($billet->body,0,30)."..."."</p>.</li>";
+
             }
-            $res .= "</ul>";
+            $res .= <<<YOP
+            </ul>
+                <h5>Pagination</h5>
+                {{$this->source->links()}}
+YOP;
         }
         else
             $res = "<h1>Erreur : la liste de billets n'existe pas !</h1>";

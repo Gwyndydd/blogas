@@ -32,19 +32,19 @@ $app = new \Slim\App($configuration);
 // Définition des routes
 
 $app->get('/billet/{id}',
-          '\blogapp\controleur\BilletControleur:affiche')
+        '\blogapp\controleur\BilletControleur:affiche')
     ->setName('billet_aff');
 
 $app->get('/billets',
-          '\blogapp\controleur\BilletControleur:liste')
+        '\blogapp\controleur\BilletControleur:liste')
     ->setName('billet_liste');
 
 $app->get('/newutil',
-          '\blogapp\controleur\UtilisateurControleur:nouveau')
+        '\blogapp\controleur\UtilisateurControleur:nouveau')
     ->setName('util_nouveau');
 
 $app->post('/createutil',
-          '\blogapp\controleur\UtilisateurControleur:cree')
+        '\blogapp\controleur\UtilisateurControleur:cree')
     ->setName('util_cree');
 
 $app->run();

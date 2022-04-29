@@ -26,11 +26,29 @@ class BilletVue extends Vue {
             $res = <<<YOP
     <h1>Affichage du billet : {$this->source->id}</h1>
     <h2>Nom : {$this->source->titre}</h2>
+    <h3>{$this->source->date}</h3>
     <ul>
-      <li>Catégorie : {$this->source->categorie->titre}</li>
-      <li>Contenu : {$this->source->body}</li>
+        <li>Catégorie : {$this->source->categorie->titre}</li>
+        <li>Contenu : {$this->source->body}</li>
     </ul>
-YOP;
+    <h3>Commentaire</h3>
+    <ul>
+    YOP;
+            
+            $com = $this->source->commentaire()->get();
+            if($com != null){
+                foreach($com as $com){
+                    $res .= <<< YOP
+        <li>
+            <h4>date : {$com->DateCom}</h4>
+            <p>{$com->contenu}</p>
+        </li>
+    YOP;
+                }   
+            }
+            else $res.="<li><h4>Aucun commentaire<h4></li>";
+        $res .= "</ul>";
+
         }
         else
             $res = "<h1>Erreur : le billet n'existe pas !</h1>";
@@ -46,11 +64,10 @@ YOP;
     <h1>Affichage de la liste des billets</h1>
     <ul>
 YOP;
-
             foreach ($this->source as $billet) {
                 $url = $this->cont->router->pathFor('billet_aff', ['id' => $billet->id]);
                 $res .= <<<YOP
-      <li><a href="$url">{$billet->titre}</a></li>
+        <li><a href="$url">{$billet->titre}</a></li>
 YOP;
             }
             $res .= "</ul>";
@@ -60,4 +77,6 @@ YOP;
 
         return $res;
     }
+
+
 }

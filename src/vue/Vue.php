@@ -27,21 +27,21 @@ class Vue {
         // structure des flashs (pour info)
         //var_dump($flash);
         $res = <<<YOP
- <!doctype html>
- <html>
-   <head>
-     <title>Application de Blog !</title>
-     <link rel="stylesheet" href="{$this->baseURL()}/css/styles.css" type="text/css" />
-     <meta charset="utf-8" />
-   </head>
-   <body>
+<!doctype html>
+<html>
+    <head>
+        <title>Application de Blog !</title>
+        <link rel="stylesheet" href="{$this->baseURL()}/css/styles.css" type="text/css" />
+        <meta charset="utf-8" />
+</head>
+<body>
 YOP;
         // Gestion des flashs
         if ($flash) {
             foreach ($flash as $catFlash => $lesFlash) {
                 $res .= <<<YOP
             <div class="flash-$catFlash">
-              <ul>
+                <ul>
 YOP;
                 foreach($lesFlash as $f)
                     $res .= "<li>$f</li>";
@@ -51,8 +51,8 @@ YOP;
         }
         
         $res .= <<<YOP
-     $cont
-   </body>
+    $cont
+    </body>
 </html>
 YOP;
 

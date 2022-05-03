@@ -12,6 +12,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \blogapp\conf\ConnectionFactory;
 use Illuminate\Pagination\Paginator;
 
+
 // Création de la connexion à la base
 ConnectionFactory::makeConnection('src/conf/conf.ini');
 
@@ -39,6 +40,10 @@ $app->get('/billet/{id}',
 $app->get('/billets',
         '\blogapp\controleur\BilletControleur:liste')
     ->setName('billet_liste');
+
+$app->get('/billets/{nb_billets}',
+    '\blogapp\controleur\BilletControleur:liste')
+    ->setName('billet_liste_suite');
 
 $app->get('/newutil',
         '\blogapp\controleur\UtilisateurControleur:nouveau')

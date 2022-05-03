@@ -21,7 +21,8 @@ class UtilisateurControleur {
         // Récupération variable POST + nettoyage
         $nom = filter_var($rq->getParsedBodyParam('nom'), FILTER_SANITIZE_STRING);
         // Insertion dans la base...
-        // ...
+        
+
         // Ajout d'un flash
         $this->cont->flash->addMessage('info', "Utilisateur $nom ajouté !");
         // Retour de la réponse avec redirection

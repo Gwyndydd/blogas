@@ -19,8 +19,12 @@ class UtilisateurVue extends Vue {
     public function nouveau() {
         return <<<YOP
         <form method="post" action="{$this->cont['router']->pathFor('util_cree')}">
-            <input type="text" name="nom">
-            <input type="submit" value="Go go go !">
+            <label for="user_nom">Nom :</label> <input type="text" id="nom" name="user_nom">
+            <label for="user_prenom">Prénom :</label><input type="text" name="user_prenom">
+            <label for="user_pseudo">Pseudo :</label><input type="text" name="user_pseudo">
+            <label for="user_mdp">Mot de passe :</label><input type="password" name="user_mdp">
+            <label for="user_email">email:</label><input type="text" name="user_email">
+            <input type="submit" value="OK">
         </form>
 YOP;
     }

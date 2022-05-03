@@ -65,23 +65,23 @@ class BilletVue extends Vue {
             $res = <<<YOP
     <h1>Affichage de la liste des billets</h1>
     <ul>
-YOP;        $coll = $this->source->forPage(2,1);
+YOP;       
             foreach ($this->source as $billet) {
                 $url = $this->cont->router->pathFor('billet_aff', ['id' => $billet->id]);
                 $res .= <<<YOP
         <li><a href="$url">{$billet->titre}</a>
         <h4>{$billet->date}</h4>
         <h4>catégorie: {$billet->categorie->titre}</h4>
+        <h4>Commentaires : {$billet->commentaire()->count()}</h4>
         <p>
 YOP;
-        $res.= substr($billet->body,0,30)."..."."</p>.</li>";
+        $res.= substr($billet->body,0,30)."..."."</p></li>";
 
             }
-            $res .= <<<YOP
-            </ul>
-                <h5>Pagination</h5>
-                {{$this->source->links()}}
-YOP;
+            $nb_billet = $this->source->count() + 2;
+            $url2 = $this->cont->router->pathFor('billet_liste_suite',['nb_billets' => $nb_billet]);
+            $res.= '<a href="'.$url2.'">Afficher plus</a>';
+
         }
         else
             $res = "<h1>Erreur : la liste de billets n'existe pas !</h1>";
